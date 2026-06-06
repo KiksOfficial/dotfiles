@@ -1,72 +1,45 @@
--- since this is just an example spec, don't actually load anything here and return an empty spec
--- stylua: ignore
-if true then return {} end
-
 return {
-  -- add gruvbox
-  { "ellisonleao/gruvbox.nvim" },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+  },
 
-  -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox",
+      colorscheme = "catppuccin-mocha",
     },
   },
 
-  -- Rust plugins
-  -- Language Server for Rust
-  {
-    "rust-analyzer",
-    ft = "rust",
-    config = function()
-      require("lspconfig").rust_analyzer.setup({})
-    end,
-  },
-
-  -- nvim-lspconfig for language server management
   {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
         rust_analyzer = {},
+        pyright = {},
       },
     },
   },
 
-  -- Treesitter for syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
-        "rust",
-        "lua",
-        "javascript",
-        "python",
-      },
-    },
-  },
-
-  -- Completion plugin
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = { "hrsh7th/cmp-nvim-lsp" },
     opts = function(_, opts)
-      table.insert(opts.sources, { name = "nvim_lsp" })
+      if type(opts.ensure_installed) == "table" then
+        vim.list_extend(opts.ensure_installed, { "rust", "python", "lua" })
+      end
     end,
   },
 
-  -- Status line
   {
     "nvim-lualine/lualine.nvim",
     opts = {
       options = {
-        theme = "gruvbox",
+        theme = "catppuccin",
       },
     },
   },
 
-  -- Fuzzy finder
   {
     "nvim-telescope/telescope.nvim",
     opts = {
@@ -77,14 +50,16 @@ return {
     },
   },
 
-  -- Tool manager for Rust-related tools
   {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
+        "rust-analyzer",
+        "pyright",
+
         "rustfmt",
-        "cargo",
-        "clippy",
+        "black",
+        "stylua",
       },
     },
   },
