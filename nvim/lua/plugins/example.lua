@@ -1,14 +1,18 @@
 return {
+
   {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
+    opts = {
+      flavour = "mocha",
+    },
   },
 
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin-mocha",
+      colorscheme = "catppuccin-nvim",
     },
   },
 
@@ -32,6 +36,11 @@ return {
   },
 
   {
+    "ShinKage/idris2-vim",
+    ft = { "idris2" },
+  },
+
+  {
     "nvim-lualine/lualine.nvim",
     opts = {
       options = {
@@ -51,13 +60,11 @@ return {
   },
 
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
         "rust-analyzer",
         "pyright",
-
-        "rustfmt",
         "black",
         "stylua",
       },
