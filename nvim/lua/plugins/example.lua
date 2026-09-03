@@ -36,6 +36,11 @@ return {
   },
 
   {
+    "ShinKage/idris2-vim",
+    ft = { "idris2" },
+  },
+
+  {
     "nvim-lualine/lualine.nvim",
     opts = {
       options = {
