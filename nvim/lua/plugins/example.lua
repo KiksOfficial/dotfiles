@@ -18,10 +18,14 @@ return {
 
   {
     "neovim/nvim-lspconfig",
+    lazy = false,
     opts = {
       servers = {
         rust_analyzer = {},
         pyright = {},
+        idris2 = {
+          filetypes = { "idris", "lidris", "idris2" },
+        },
       },
     },
   },
