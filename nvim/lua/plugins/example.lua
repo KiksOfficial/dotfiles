@@ -1,5 +1,4 @@
 return {
-
   {
     "catppuccin/nvim",
     name = "catppuccin",
@@ -12,7 +11,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin-nvim",
+      colorscheme = "catppuccin",
     },
   },
 
@@ -23,9 +22,11 @@ return {
       servers = {
         rust_analyzer = {},
         pyright = {},
-        idris2 = {
-          filetypes = { "idris", "lidris", "idris2" },
-        },
+        clangd = {},
+        html = {},
+        cssls = {},
+        ts_ls = {},
+        idris2_lsp = {},
       },
     },
   },
@@ -34,14 +35,25 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
       if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "rust", "python", "lua" })
+        vim.list_extend(opts.ensure_installed, {
+          "rust",
+          "python",
+          "lua",
+          "c",
+          "html",
+          "css",
+          "javascript",
+          "idris",
+        })
       end
     end,
   },
 
+  -- 2. Vahetatud idris2-nvim vastu, mis toetab täielikult Lua-d ja LSP-d
   {
-    "ShinKage/idris2-vim",
-    ft = { "idris2" },
+    "ShinKage/idris2-nvim",
+    ft = { "idris", "lidris", "idris2", "idr" },
+    opts = {},
   },
 
   {
@@ -71,6 +83,11 @@ return {
         "pyright",
         "black",
         "stylua",
+        "html-lsp",
+        "css-lsp",
+        "typescript-language-server",
+        "clangd",
+        "clang-format",
       },
     },
   },
